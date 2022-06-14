@@ -6,6 +6,7 @@ CREATE TABLE Clientes(
     segungo_nombre   VARCHAR2(250),
     apellido_paterno VARCHAR2(250) NOT NULL,
     apellido_materno VARCHAR2(250),
+    direccion        VARCHAR2(250),
 );
 
 --Creacion PK clientes
@@ -39,3 +40,17 @@ SELECT * FROM Comunas;
 
 --Select ordenado
 SELECT * FROM Clientes ORDER BY rut_cliente; 
+
+SELECT
+    primer_nombre,
+    apellido_paterno,
+    comuna_id,
+FROM Clientes;
+
+SELECT
+    cl.primer_nombre AS "Nombre",
+    cl.apellido_paterno AS "Apellido",
+    co.nombre AS "Comuna",
+FROM Clientes AS cl
+    Join Comunas co ON (cl.comuna_id = co.id_comuna)
+;
