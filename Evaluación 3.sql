@@ -157,3 +157,34 @@ ALTER TABLE Historial_Pago ADD CONSTRAINT Historial_Pago_PK PRIMARY KEY (Id_Hist
 ALTER TABLE Beneficios ADD CONSTRAINT Beneficios_PK PRIMARY KEY (Id_Beneficios);
 ALTER TABLE Descuento_Transporte ADD CONSTRAINT Descuento_Transporte_PK PRIMARY KEY (Id_Descuento);
 ALTER TABLE Recepcionista ADD CONSTRAINT Recepcionista_PK PRIMARY KEY (Id_Recepcionista);
+
+---Creación de claves foraneas
+ALTER TABLE Region ADD CONSTRAINT Region_Id_Pais_FK FOREIGN KEY (Id_Pais) REFERENCES Pais (Id_Pais);
+ALTER TABLE Ciudad ADD CONSTRAINT Ciudad_Id_Region_FK FOREIGN KEY (Id_Region) REFERENCES Region (Id_Region);
+ALTER TABLE Comuna ADD CONSTRAINT Comuna_Id_Ciudad_FK FOREIGN KEY (Id_Ciudad) REFERENCES Ciudad (Id_Ciudad);
+ALTER TABLE Sede ADD CONSTRAINT Sede_Id_Comuna_FK FOREIGN KEY (Id_Comuna) REFERENCES Comnuna (Id_Comuna);
+ALTER TABLE Sede ADD CONSTRAINT Sede_Id_Sindicato_FK FOREIGN KEY (Id_Sindicato) REFERENCES Sindicato (Id_Sindicato);
+ALTER TABLE Sindicato ADD CONSTRAINT Sindicato_Id_Aseguradora_FK FOREIGN KEY (Id_Aseguradora) REFERENCES Aseguradora (Id_Aseguradora);
+ALTER TABLE Aseguradora ADD CONSTRAINT Aseguradora_Id_Sindicato_FK FOREIGN KEY (Id_Sindicato) REFERENCES Sindicato (Id_Sindicato);
+ALTER TABLE Recepcionista ADD CONSTRAINT Recepcionista_Id_Sede_FK FOREIGN KEY (Id_Sede) REFERENCES Sede (Id_Sede);
+ALTER TABLE Sede ADD CONSTRAINT Sede_Id_Comuna_FK FOREIGN KEY (Id_Comuna) REFERENCES Comnuna (Id_Comuna);
+ALTER TABLE Solicitud_Ingreso ADD CONSTRAINT Solicitud_Ingreso_Id_Recepcionista_FK FOREIGN KEY (Id_Recepcionista) REFERENCES Recepcionista (Id_Recepcionista);
+ALTER TABLE Solicitud_Ingreso ADD CONSTRAINT Solicitud_Ingreso_Id_Persona_FK FOREIGN KEY (Id_Persona) REFERENCES Persona (Id_Persona);
+ALTER TABLE Persona ADD CONSTRAINT Persona_Id_Solicitud_Ingreso_FK FOREIGN KEY (Id_Solicitud_Ingreso) REFERENCES Solicitud_Ingreso (Id_Solicitud_Ingreso);
+ALTER TABLE Persona ADD CONSTRAINT Persona_Id_Nacionalidad_FK FOREIGN KEY (Id_Nacionalidad) REFERENCES Nacionalidad (Id_Nacionalidad);
+ALTER TABLE Cargas ADD CONSTRAINT Cargas_Id_Nacionalidad_FK FOREIGN KEY (Id_Nacionalidad) REFERENCES Nacionalidad (Id_Nacionalidad);
+ALTER TABLE Cargas ADD CONSTRAINT Cargas_Id_Afiliados_FK FOREIGN KEY (Id_Afiliados) REFERENCES Afiliados (Id_Afiliados);
+ALTER TABLE Cargas ADD CONSTRAINT Cargas_Id_Persona_FK FOREIGN KEY (Id_Persona) REFERENCES Persona (Id_Persona);
+ALTER TABLE Nacionalidad ADD CONSTRAINT Nacionalidad_Id_Afiliados_FK FOREIGN KEY (Id_Afilados) REFERENCES Afiliados (Id_Afiliados);
+ALTER TABLE Nacionalidad ADD CONSTRAINT Nacionalidad_Id_Cargas_FK FOREIGN KEY (Id_Cargas) REFERENCES Cargas (Id_Cargas);
+ALTER TABLE Nacionalidad ADD CONSTRAINT Nacionalidad_Id_Personas_FK FOREIGN KEY (Id_Personas) REFERENCES Personas (Id_Personas);
+ALTER TABLE Afiliados ADD CONSTRAINT Afiliados_Id_Sindicato_FK FOREIGN KEY (Id_Sindicato) REFERENCES Sindicato (Id_Sindicato);
+ALTER TABLE Afiliados ADD CONSTRAINT Afiliados_Id_Nacionalidad_FK FOREIGN KEY (Id_Nacionalidad) REFERENCES Nacionalidad (Id_Nacionalidad);
+ALTER TABLE Afiliados ADD CONSTRAINT Afiliados_Id_Tipo_Pago_FK FOREIGN KEY (Id_Tipo_Pago) REFERENCES Tipo_Pago (Id_Tipo_Pago);
+ALTER TABLE Vehiculo ADD CONSTRAINT Vehiculo_Id_Afiliados_FK FOREIGN KEY (Id_Afiliados) REFERENCES Afiliados (Id_Afilados);
+ALTER TABLE Tipo_Pago ADD CONSTRAINT Tipo_Pago_Id_Afiliados_FK FOREIGN KEY (Id_Afiliados) REFERENCES Afiliados (Id_Afilados);
+ALTER TABLE Tipo_Pago ADD CONSTRAINT Tipo_Pago_Id_Historial_Pago_FK FOREIGN KEY (Id_Historial_Pago) REFERENCES Historial_Pago (Id_Historial_Pago);
+ALTER TABLE Historial_Pago ADD CONSTRAINT Historial_Pago_Id_Tipo_Pago_FK FOREIGN KEY (Id_Tipo_Pago) REFERENCES Tipo_Pago (Id_Tipo_Pago);
+ALTER TABLE Beneficios ADD CONSTRAINT Beneficios_Id_Historial_Pago_FK FOREIGN KEY (Id_Historial_Pago) REFERENCES Historial_Pago (Id_Historial_Pago);
+ALTER TABLE Beneficios ADD CONSTRAINT Beneficios_Id_Descuento_Transporte_FK FOREIGN KEY (Id_Descuento) REFERENCES Descuento_Transporte (Id_Descuento);
+ALTER TABLE Descuento_Transporte ADD CONSTRAINT Descuento_Transporte_Id_Beneficios_FK FOREIGN KEY (Id_Beneficios) REFERENCES Beneficios (Id_Beneficios);
