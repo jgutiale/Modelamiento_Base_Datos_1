@@ -6,36 +6,44 @@ CREATE TABLE Pais (
 
 CREATE TABLE Region (
    Id_Region     NUMBER      NOT NULL,
-   Nombre_Region CHAR        NOT NULL
+   Nombre_Region CHAR        NOT NULL,
+   Pais_Id_Pais  NUMBER      NOT NULL
 );
 
 CREATE TABLE Ciudad (
    Id_Ciudad     NUMBER       NOT NULL,
-   Nombre_Ciudad CHAR (250)   NOT NULL
+   Nombre_Ciudad CHAR (250)   NOT NULL,
+   Region_Id_Region NUMBER NOT NULL
 );
 
 CREATE TABLE Comuna (
    Id_comuna     NUMBER       NOT NULL,
-   Nombre_Comuna CHAR (250)   NOT NULL
+   Nombre_Comuna CHAR (250)   NOT NULL,
+   Ciudad_Id_Ciudad NUMBER NOT NULL,
+   Sede_Id_Sede NUMBER NOT NULL
 );
 
 CREATE TABLE Sede (
    Id_Sede     NUMBER      NOT NULL,
-   Nombre_Sede CHAR (250)  NOT NULL
+   Nombre_Sede CHAR (250)  NOT NULL,
+   Comuna_Id_Comuna NUMBER NOT NULL,
+   Sindicato_Id_Sindicato NUMBER NOT NULL
 );
 
 CREATE TABLE Sindicato (
    Id_Sindicato     NUMBER      NOT NULL,
    Nombre_Sindicato CHAR (250)  NOT NULL,
    Rut              NUMBER      NOT NULL,
-   DV               VARCHAR(1)  NOT NULL
+   DV               VARCHAR(1)  NOT NULL,
+   Aseguradora_Id_Aseguradora NUMBER NOT NULL
 );
 
 CREATE TABLE Aseguradora (
    Id_Aseguradora     NUMBER      NOT NULL,
    Nombre_Aseguradora CHAR (250)  NOT NULL,
    Rut                NUMBER      NOT NULL,
-   DV                 VARCHAR(1)  NOT NULL
+   DV                 VARCHAR(1)  NOT NULL,
+   Sindicato_Id_Sindicato NUMBER NOT NULL
 );
 
 CREATE TABLE Afiliados (
@@ -46,7 +54,10 @@ CREATE TABLE Afiliados (
    Apellido_Materno     CHAR,
    Telefono             VARCHAR2 (250) NOT NULL,
    Direccion            VARCHAR2 (250) NOT NULL,
-   Correo_Electronico   VARCHAR2 (250) NOT NULL
+   Correo_Electronico   VARCHAR2 (250) NOT NULL,
+   Sindicato_Id_Sindicato NUMBER NOT NULL,
+   Nacionalidad_Id_Nacionalidad NUMBER NOT NULL,
+   Tipo_Pago_Id_Tipo_Pago NUMBER NOT NULL
 );
 
 CREATE TABLE Vehiculo (
@@ -57,7 +68,8 @@ CREATE TABLE Vehiculo (
    Color          VARCHAR2 (250) NOT NULL,
    Tipo           VARCHAR2 (250) NOT NULL,
    Numero_Chasis  VARCHAR2 (250) NOT NULL,
-   Numero_Motor   VARCHAR2 (250) NOT NULL
+   Numero_Motor   VARCHAR2 (250) NOT NULL,
+   Afiliados_Id_Afiliados NUMBER NOT NULL
 );
 
 CREATE TABLE Recepcionista (
@@ -67,28 +79,33 @@ CREATE TABLE Recepcionista (
    Apellido_Paterno  CHAR (250)    NOT NULL,
    Apellido_Materno  CHAR (250),
    Run               NUMBER        NOT NULL,
-   DV                VARCHAR2 (1)  NOT NULL
+   DV                VARCHAR2 (1)  NOT NULL,
+   Sede_Id_Sede     NUMBER NOT NULL
 );
 
 CREATE TABLE Descuento_Transporte (
     Id_Descuento        NUMBER NOT NULL,
     Terreste            CHAR(1) NOT NULL,
     Aereo               CHAR(1) NOT NULL,
-    Maritimo            CHAR(1) NOT NULL
+    Maritimo            CHAR(1) NOT NULL,
+    Beneficios_Id_Beneficios NUMBER NOT NULL
 );
 
 CREATE TABLE Beneficios (
     Id_Beneficios       NUMBER NOT NULL,
     Salud               CHAR(1) NOT NULL,
     Educacion           CHAR(1) NOT NULL,
-    Deporte             CHAR(1) NOT NULL
+    Deporte             CHAR(1) NOT NULL,
+    Historial_Pago_Id_Historial_Pago    NUMBER NOT NULL,
+    Descuento_Transporte_Id_Descuento_Transporte NUMBER NOT  NULL
 );
 
 CREATE TABLE Historial_Pago (
     Id_Historial_Pago   NUMBER NOT NULL,   
     Pago_Inicial        NUMBER NOT NULL,
     Pago_Mensual        NUMBER,
-    Fecha_Pago          DATE NOT NULL
+    Fecha_Pago          DATE NOT NULL,
+    Tipo_Pago_Id_Tipo_Pago NUMBER NOT NULL
 );
 
 CREATE TABLE Tipo_Pago (
@@ -96,7 +113,8 @@ CREATE TABLE Tipo_Pago (
     Nombre_Banco        CHAR(250),
     Efectivo            CHAR(1) NOT NULL,
     Transferencia       CHAR(1) NOT NULL,
-    Cheque              CHAR(1) NOT NULL
+    Historial_Pago_Id_Historial_Pago    NUMBER NOT NULL,
+    Afiliados_Id_Afiliados NUMBER NOT NULL
 );
 
 CREATE TABLE Cargas (
@@ -106,7 +124,10 @@ CREATE TABLE Cargas (
     Apellido_Paterno    CHAR(250) NOT NULL,
     Apellido_Materno    CHAR(250),
     Fecha_Nacimiento    DATE NOT NULL,
-    Parentesco          CHAR(250) NOT NULL
+    Parentesco          CHAR(250) NOT NULL,
+    Personas_Id_Personas NUMBER NOT NULL,
+    Nacionalidad_Id_Nacionalidad NUMBER NOT NULL,
+    Afiliados_Id_Afiliados NUMBER NOT NULL
 );
 
 CREATE TABLE Nacionalidad (
@@ -114,7 +135,10 @@ CREATE TABLE Nacionalidad (
     Nombre              CHAR(250) NOT NULL,
     Run                 NUMBER,
     DV                  CHAR(1),
-    Pasaporte           CHAR(250) NOT NULL
+    Pasaporte           CHAR(250) NOT NULL,
+    Personas_Id_Personas NUMBER NOT NULL, 
+    Cargas_Id_Cargas NUMBER NOT NULL,
+    Afiliados_Id_Afiliados NUMBER NOT NULL
 );
 
 CREATE TABLE Persona (
@@ -129,13 +153,17 @@ CREATE TABLE Persona (
     Curriculum_Vitae    CHAR(1) NOT NULL,
     Correo_Electronico  VARCHAR2(250) NOT NULL,
     Genero              VARCHAR2(250) NOT NULL,
-    Discapacidad        VARCHAR2(250)
+    Discapacidad        VARCHAR2(250),
+    Solicitud_Ingreso_Id_Solicitud_Ingreso NUMBER NOT NULL,
+    Nacionalidad_Id_Nacionalidad NUMBER NOT NULL
 );
 CREATE TABLE Solicitud_Ingreso (
     Id_Solicitud        NUMBER NOT NULL,
     Entrega_Formulario  CHAR(1) NOT NULL,
     Fecha_Creacion      DATE NOT NULL,
-    Pretension_Sueldo   NUMBER NOT NULL
+    Pretension_Sueldo   NUMBER NOT NULL,
+    Recepcionista_Id_Recepcionista NUMBER NOT NULL,
+    Persona_Id_Persona NUMBER NOT NULL
 );
 
 --Creación de claves primarias
@@ -158,7 +186,7 @@ ALTER TABLE Beneficios ADD CONSTRAINT Beneficios_PK PRIMARY KEY (Id_Beneficios);
 ALTER TABLE Descuento_Transporte ADD CONSTRAINT Descuento_Transporte_PK PRIMARY KEY (Id_Descuento);
 ALTER TABLE Recepcionista ADD CONSTRAINT Recepcionista_PK PRIMARY KEY (Id_Recepcionista);
 
----Creación de claves foraneas
+--Creación de claves foraneas
 ALTER TABLE Region ADD CONSTRAINT Region_Id_Pais_FK FOREIGN KEY (Id_Pais) REFERENCES Pais (Id_Pais);
 ALTER TABLE Ciudad ADD CONSTRAINT Ciudad_Id_Region_FK FOREIGN KEY (Id_Region) REFERENCES Region (Id_Region);
 ALTER TABLE Comuna ADD CONSTRAINT Comuna_Id_Ciudad_FK FOREIGN KEY (Id_Ciudad) REFERENCES Ciudad (Id_Ciudad);
