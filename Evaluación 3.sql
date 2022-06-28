@@ -77,7 +77,7 @@ CREATE TABLE Descuento_Transporte (
     Maritimo            CHAR(1) NOT NULL
 );
 
-CREATE TABLE Beneficioos (
+CREATE TABLE Beneficios (
     Id_Beneficios       NUMBER NOT NULL,
     Salud               CHAR(1) NOT NULL,
     Educacion           CHAR(1) NOT NULL,
@@ -130,6 +130,12 @@ CREATE TABLE Persona (
     Correo_Electronico  VARCHAR2(250) NOT NULL,
     Genero              VARCHAR2(250) NOT NULL,
     Discapacidad        VARCHAR2(250)
+);
+CREATE TABLE Solicitud_Ingreso (
+    Id_Solicitud        NUMBER NOT NULL,
+    Entrega_Formulario  CHAR(1) NOT NULL,
+    Fecha_Creacion      DATE NOT NULL,
+    Pretension_Sueldo   NUMBER NOT NULL
 );
 
 --Creación de claves primarias
