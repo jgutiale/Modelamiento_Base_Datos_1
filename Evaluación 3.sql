@@ -1,4 +1,81 @@
 --Creacion de tablas
+CREATE TABLE Pais (
+   Id_Pais     NUMBER      NOT NULL,
+   Nombre_Pais CHAR (250)  NOT NULL
+);
+
+CREATE TABLE Region (
+   Id_Region     NUMBER      NOT NULL,
+   Nombre_Region CHAR        NOT NULL
+);
+
+CREATE TABLE Ciudad (
+   Id_Ciudad     NUMBER       NOT NULL,
+   Nombre_Ciudad CHAR (250)   NOT NULL
+);
+
+CREATE TABLE Comuna (
+   Id_comuna     NUMBER       NOT NULL,
+   Nombre_Comuna CHAR (250)   NOT NULL
+);
+
+CREATE TABLE Sede (
+   Id_Sede     NUMBER      NOT NULL,
+   Nombre_Sede CHAR (250)  NOT NULL
+);
+
+CREATE TABLE Sindicato (
+   Id_Sindicato     NUMBER      NOT NULL,
+   Nombre_Sindicato CHAR (250)  NOT NULL,
+   Rut              NUMBER      NOT NULL,
+   DV               VARCHAR(1)  NOT NULL
+);
+
+CREATE TABLE Aseguradora (
+   Id_Aseguradora     NUMBER      NOT NULL,
+   Nombre_Aseguradora CHAR (250)  NOT NULL,
+   Rut                NUMBER      NOT NULL,
+   DV                 VARCHAR(1)  NOT NULL
+);
+
+CREATE TABLE Afiliados (
+   Id_Afiliados         NUMBER         NOT NULL,
+   Prime_Nombre         CHAR (250)     NOT NULL,
+   Segundo_Nombre       CHAR,
+   Apellido_Paterno     CHAR (250)     NOT NULL,
+   Apellido_Materno     CHAR,
+   Telefono             VARCHAR2 (250) NOT NULL,
+   Direccion            VARCHAR2 (250) NOT NULL,
+   Correo_Electronico   VARCHAR2 (250) NOT NULL
+);
+
+CREATE TABLE Vehiculo (
+   Id_Vehiculo    NUMBER
+   Marca          VARCHAR2 (250) NOT NULL,
+   Modelo         VARCHAR2 (250) NOT NULL,
+   Patente        VARCHAR2 (250) NOT NULL,
+   Color          VARCHAR2 (250) NOT NULL,
+   Tipo           VARCHAR2 (250) NOT NULL,
+   Numero_Chasis  VARCHAR2 (250) NOT NULL,
+   Numero_Motor   VARCHAR2 (250) NOT NULL
+);
+
+CREATE TABLE Recepcionista (
+   Id_recepcionista  NUMBER        NOT NULL,
+   Primer_Nombre     CHAR (250)    NOT NULL,
+   Segundo_Nombre    CHAR (250),
+   Apellido_Paterno  CHAR (250)    NOT NULL,
+   Apellido_Materno  CHAR (250),
+   Run               NUMBER        NOT NULL,
+   DV                VARCHAR2 (1)  NOT NULL
+);
+
+CREATE TABLE Recepcionista (
+   Id_Solicitud       NUMBER,
+   Entrega_Formulario CHAR (1),
+   Fecha_Creacion     DATE,
+   Pretension_Sueldo  NUMBER
+);
 CREATE TABLE Descuento_Transporte(
     Id_Descuento        NUMBER NOT NULL,
     Terreste            CHAR(1) NOT NULL,
